@@ -1,0 +1,18 @@
+# nodeport-service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: exam-nginx-service
+  namespace: exam-nginx
+spec:
+  type: NodePort
+  selector:
+    app: nginx-app
+  ports:
+    - name: nginx-port
+      protocol: TCP
+      port: 8080
+      targetPort: 80
+      nodePort: 30000
+
+

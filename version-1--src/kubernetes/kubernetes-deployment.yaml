@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlops-examen
+  namespace: bartdewa-examen
+  labels:
+    app: examen-app
+spec:
+  selector:
+    matchLabels:
+      app: examen-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: examen-app
+    spec:
+      containers:
+        - name: api-container
+          image: api-exam:bartdewa_mlops-exam-backend
+          ports:
+          - containerPort: 80
+          env:
+            - name: KEY1
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATA
+            - name: KEY2
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: NAME
+        - name: frontend-container
+          image: frontend-exam:bartdewa_mlops-exam-frontend
+          ports:
+          - containerPort: 80
+          env:
+            - name: KEY3
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: API_PORT

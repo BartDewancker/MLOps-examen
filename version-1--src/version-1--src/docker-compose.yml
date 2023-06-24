@@ -1,13 +1,13 @@
 services:
   api:
-    image: api-exam:bartdewa/mlops-exam-backend
+    image: api-exam:bartdewa_mlops-exam-backend
     build:
       context: api
       dockerfile: dockerfile
     environment:
       file_format: json
   frontend:
-    image: frontend-exam:bartdewa/mlops-exam-frontend
+    image: frontend-exam:bartdewa_mlops-exam-frontend
     build:
       context: frontend
       dockerfile: frontend-dockerfile

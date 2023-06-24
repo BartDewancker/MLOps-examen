@@ -1,0 +1,26 @@
+name: MLOps examen
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+env:
+  
+  GIT_SHA: ${{ github.sha }}
+  WORKDIR: version-1-src
+    
+jobs:
+  build-images:
+   
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Create namespace
+        run: |
+           cd version-1-src
+           docker compose --build
+           docker tag api-exam:bartdewa_mlops-exam-backend api-exam:bartdewa_mlops-exam-backend_${{ env.GIT_SHA }}
+           docker tag frontend-exam:bartdewa_mlops-exam-frontend frontend-exam:bartdewa_mlops-exam-frontend_${{ env.GIT_SHA }}
+        working-directory: ${{ env.WORKDIR }}
+
+
+
